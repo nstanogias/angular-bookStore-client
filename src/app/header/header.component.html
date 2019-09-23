@@ -1,0 +1,17 @@
+<nav class="navbar bg-dark text-white">
+  <a class="navbar-brand text-white" routerLink="/">BOOK STORE</a>
+  <ul class="navbar-right">
+    <li class="nav-item" *ngIf="userIsAuthenticated && !isUserAdmin">
+      <app-cart-summary></app-cart-summary>
+    </li>
+    <li class="nav-item" *ngIf="!userIsAuthenticated">
+      <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">Login</a>
+    </li>
+    <li class="nav-item" *ngIf="!userIsAuthenticated">
+      <a class="nav-link" routerLink="/auth/signup" routerLinkActive="active">Signup</a>
+    </li>
+    <li class="nav-item" *ngIf="userIsAuthenticated">
+      <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+    </li>
+  </ul>
+</nav>
