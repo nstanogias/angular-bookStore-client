@@ -3,6 +3,7 @@ import {BookService} from '../book.service';
 import {Book} from '../book.model';
 import {Cart} from '../../cart/cart.model';
 import {Router} from '@angular/router';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-book-list',
@@ -10,12 +11,12 @@ import {Router} from '@angular/router';
 })
 
 export class BookListComponent {
-  public selectedCategory = null;
-  public booksPerPage = 4;
-  public selectedPage = 1;
+  selectedCategory = null;
+  booksPerPage = 4;
+  selectedPage = 1;
+  errorMessage: string = null;
 
-  constructor(private bookService: BookService, private cart: Cart, private router: Router) {
-  }
+  constructor(private bookService: BookService, private cart: Cart, private router: Router, private authService: AuthService) {}
 
   get books(): Book[] {
     const pageIndex = (this.selectedPage - 1) * this.booksPerPage;
@@ -48,7 +49,15 @@ export class BookListComponent {
   }
 
   addBookToCart(book: Book) {
-    this.cart.addLine(book);
-    this.router.navigateByUrl('/cart');
+    if (!this.authService.getIsAuth()) {
+      this.errorMessage = 'You must log in first!';
+    } else {
+      this.cart.addLine(book);
+      this.router.navigate(['/cart']);
+    }
+  }
+
+  onHandleError() {
+    this.errorMessage = null;
   }
 }

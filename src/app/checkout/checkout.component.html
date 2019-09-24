@@ -4,6 +4,7 @@
   <p>We'll ship your books as soon as possible.</p>
   <button class="btn btn-primary" routerLink="/">Return to Store</button>
 </div>
+<app-alert [message]="errorMessage" (close)="onHandleError()" *ngIf="errorMessage"></app-alert>
 <form *ngIf="!orderSent" #form="ngForm" novalidate
       (ngSubmit)="submitOrder(form)" class="m-2">
   <div class="form-group">

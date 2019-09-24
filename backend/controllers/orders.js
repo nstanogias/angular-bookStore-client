@@ -100,7 +100,7 @@ exports.getOrder = (req, res, next) => {
 };
 
 exports.deleteOrder = (req, res, next) => {
-  Order.deleteOne({ _id: req.params.id, creator: req.userData.userId })
+  Order.deleteOne({ _id: req.params.id})
     .then(result => {
       if (result.n > 0) {
         res.status(200).json({ message: "Deletion successful!" });

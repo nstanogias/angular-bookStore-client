@@ -9,10 +9,12 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+    const isUserAdmin = this.authService.getIsAdmin();
+    if (state.url.startsWith('/admin') && !isUserAdmin) {
+      this.router.navigate(['/']);
+      return false;
+    }
     const isAuth = this.authService.getIsAuth();
     if (!isAuth) {
       this.router.navigate(['/auth/login']);

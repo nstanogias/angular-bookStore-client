@@ -11,6 +11,7 @@
       </button>
     </div>
     <div class="col-9 p-2">
+      <app-alert *ngIf="errorMessage" [message]="errorMessage" (close)="onHandleError()"></app-alert>
       <div *ngFor="let book of books" class="card m-1 p-1 bg-light">
         <h4>
           {{book.title}}

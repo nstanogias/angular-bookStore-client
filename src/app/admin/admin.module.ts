@@ -21,7 +21,7 @@ const routing = RouterModule.forChild([
       {path: '**', redirectTo: 'books'}
     ]
   },
-  {path: '**', redirectTo: 'auth'}
+  {path: '**', redirectTo: 'auth/login'}
 ]);
 
 @NgModule({

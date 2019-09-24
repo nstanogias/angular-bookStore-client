@@ -12,6 +12,7 @@ import {CheckoutComponent} from './checkout/checkout.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import {AuthGuard} from './auth/auth.guard';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,14 @@ import {AuthGuard} from './auth/auth.guard';
     BookListComponent,
     CartSummaryComponent,
     CartDetailComponent,
-    CheckoutComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

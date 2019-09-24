@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {BookListComponent} from './books/book-list/book-list.component';
 import {CartDetailComponent} from './cart/cart-detail/cartDetail.component';
 import {CheckoutComponent} from './checkout/checkout.component';
@@ -15,7 +15,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  // useHash: true if we dont want a reload of app when url changes from browser tab
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
